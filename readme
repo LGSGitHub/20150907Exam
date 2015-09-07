@@ -1,0 +1,5 @@
+1、执行mvn clean
+2、执行mvn compile
+3、执行mvn tomcat:run
+4、打开浏览器，输入http://localhost:8080/20150907ExamStruts2/login.jsp
+5、数据库配置文件：dbconfig.properties，放在src/main/resources文件夹下

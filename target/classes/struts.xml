@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- bean 标签 用于创建一个javabean实例 -->
+	<!-- constant标签 是struts2默认行为标签 -->
+	<!-- package标签 包标签，用于区分不同的请求文件，比如说网站前台，网站后台 -->
+	<!-- include标签 用于引入其他的xml位置文件 -->
+
+	<!-- 配置web默认编码集，相当于HttpSerdvletRequest.setChartacterEncoding用法 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+
+	<!-- 默认我们的Struts2的请求后缀是.action，也就是说我们不配置该元素，action/do都可以 -->
+	<constant name="struts.action.extension" value="action,do"></constant>
+
+	<!-- 设置浏览器是否缓存静态内容，默认值为true，在我们开发阶段建议关闭，防止修改后测试不到 -->
+	<constant name="struts.serve.static.browserCache" value="false"></constant>
+
+	<!-- 当struts配置文件修改后，系统是否自动重新加载该文件，默认为false -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+
+	<!-- 开发模式下使用，这样可以打印出更加详细的错误信息 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+
+	<!-- name:包名，用于被别的包调用或者继承，extends:继承，一般默认继承struts-default -->
+	
+	
+	
+	<package name="login" extends="struts-default">
+		
+		<!-- 使用通配符配置action，注意：编写代码格式一定要严谨（跳转链接的名字，action文件里方法的名字等） -->
+		<action name="*_*" class="com.hand.action.{1}Action" method="{2}">
+			<result name="{1}success">/{1}index.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<!-- <action name="loginAction" class="com.hand.action.LoginAction">
+			<result name="Loginsuccess">/Loginindex.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action> -->
+		
+	</package>
+
+	<!-- Add packages here -->
+
+</struts>
