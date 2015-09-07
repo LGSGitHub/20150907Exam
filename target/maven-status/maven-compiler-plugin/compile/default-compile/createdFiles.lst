@@ -1,0 +1,8 @@
+com\hand\entity\Film.class
+com\hand\entity\Customer.class
+com\hand\entity\Address.class
+com\hand\action\LogoutAction.class
+com\hand\action\LoginAction.class
+com\hand\daoImpl\CustomerDaoImpl.class
+com\hand\util\ConnectionFactory.class
+com\hand\interceptor\LoginInterceptor.class
