@@ -40,7 +40,7 @@ p {
 		<div>
 			<p>8822林晓东</p>
 		</div>
-		<div>
+		<div style="margin:2px auto;width:500px;height:200px;background-color:#ffffff;text-align:center;">
 			<form action="<%=request.getContextPath()%>/Login_execute.action" method="post">
 				<center>
 					<table border="2" cellspacing="0" cellpadding="5"
@@ -60,12 +60,20 @@ p {
 						<tr>
 							<td colspan="2" align="center"><input type="submit"
 								name="submit" onClick="return check(this);" /> <input
-								type="reset" name="reset" /></td>
-
+								type="reset" name="reset" />
+							</td>
 						</tr>
 					</table>
 				</center>
 			</form>
+			<%-- <s:form action="/Login_execute.action" method="post">
+				<s:text name="电影租贷管理系统"/>
+				<s:textfield label="用户名" name="username"/>
+				<s:textfield label="密码" name="password"/>
+				<s:submit name="submit" value="登录" theme = "simple"/>
+				<s:reset name="reset" value="重置"/>
+			</s:form> --%>
+			
 		</div>
 	</div>
 </body>

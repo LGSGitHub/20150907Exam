@@ -65,9 +65,8 @@ public class LoginAction extends ActionSupport {
 		// 获取httpsession对象
 		HttpSession session = request.getSession();
 
-		Connection conn = ConnectionFactory.getInstance().makeConnection();
 		CustomerDaoImpl cdi = new CustomerDaoImpl();
-		if (cdi.isExist(conn, username, password)) {
+		if (cdi.isExist(username, password)) {
 			session.setAttribute("flag", "login_success");
 			session.setAttribute("username", username);
 			return true;
@@ -75,5 +74,17 @@ public class LoginAction extends ActionSupport {
 			return false;
 		}
 
+	}
+	
+	@Override
+	public void validate() {
+		if(username == null || username.trim().equals(""))
+		{
+			addFieldError("username", "The name is required");
+		}
+		if(password == null || password.trim().equals(""))
+		{
+			addFieldError("password", "The password is required");
+		}
 	}
 }

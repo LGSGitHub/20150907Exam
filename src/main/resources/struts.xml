@@ -29,19 +29,40 @@
 	
 	
 	
-	<package name="login" extends="struts-default">
+	<package name="default" extends="struts-default,json-default" namespace="/">
 		
 		<!-- 使用通配符配置action，注意：编写代码格式一定要严谨（跳转链接的名字，action文件里方法的名字等） -->
 		<action name="*_*" class="com.hand.action.{1}Action" method="{2}">
 			<result name="{1}success">/{1}index.jsp</result>
-			<result name="error">/login.jsp</result>
+			<result name="error">/Login.jsp</result>
+			<result name="input">/{1}.jsp</result>
+			<result name="success">/Loginindex.jsp</result>
+			<result name="addCustomer">/addCustomer.jsp</result>
 		</action>
-		<!-- <action name="loginAction" class="com.hand.action.LoginAction">
-			<result name="Loginsuccess">/Loginindex.jsp</result>
-			<result name="error">/login.jsp</result>
-		</action> -->
+		
+		<!-- 用ajax获取Customer数据的Action -->
+		<action name="getCustomer" class="com.hand.action.GetCustomerAction" method="execute">
+			<result type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 用ajax获取Address数据的Action -->
+		<action name="getAddress" class="com.hand.action.GetAddressAction" method="execute">
+			<result type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
 		
 	</package>
+	
+	<!-- <package name="Customer" extends="struts-default,json-default">
+		<action name="getCustomer" class="com.hand.action.GetCustomerAction" method="execute">
+			<result type="json">
+				<param name="root">dataStr</param>
+			</result>
+		</action>
+	</package> -->
 
 	<!-- Add packages here -->
 

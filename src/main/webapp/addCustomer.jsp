@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>添加用户</title>
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 <div id="container">
@@ -68,58 +69,85 @@
 				</ul>
 			</div>
 			
-			<div class="col-md-10" id="addCustomer" style="height:500px;background-color:#cccccc;">
+			<div class="col-md-10" id="addCustomer">
 				<div style="font-size:20px; margin:10px;"><strong>创建Customer</strong></div>
 				
 				<hr style="background-color: #ADD8E6;height:2px;">
 				
-				<div style="">基本信息</div>
+				<div style="font-size:20px;margin-bottom:20px;">基本信息</div>
 				
-				<div>
-					<%-- <table style="width:500px;border:red solid 2px;">
-						<tr>
-							<td style="text-align:right;">First Name<span style="color:red">*</span></td>
-							<td><input type="text" name="first_name"></td>
-						</tr>
+				<div style="width:600px;" id="addMessage">
+				
+					<form action="AddCustomer_execute.action" method="post" role="form" class="form-horizontal">
+						<div class="form-group form-group-md">
+							<label class="col-md-4 control-label">First Name</label>
+							<span style="color:red;">*</span>
+							<div class="col-md-6">
+								<input type="text" class="form-control" id="firstName" name="first_name">
+							</div>
+						</div>
+							
+						<div class="form-group form-group-md">
+							<label class="col-md-4 control-label">Last Name</label>
+							<span style="color:red;">*</span>
+							<div class="col-md-6">
+								<input type="text" class="form-control" id="lastName" name="last_name">
+							</div>
+						</div>
+							
+						<div class="form-group form-group-md">
+							<label class="col-md-4 control-label">Email</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" id="email" name="email">
+							</div>
+						</div>
+							
+						<div class="form-group form-group-md">
+							<label class="col-md-4 control-label">Address</label>
+							<span style="color:red;">*</span>
+							<div class="col-md-6">
+								<select class="form-control" id="address" name="address"></select>
+							</div>
+						</div>
 						
-						<tr>
-							<td style="text-align:right;">Last Name<span style="color:red">*</span></td>
-							<td><input type="text" name="last_name"></td>
-						</tr>
-						<tr>
-							<td style="text-align:right;">Email</td>
-							<td><input type="text" name="email"></td>
-						</tr>
-						
-						<tr>
-							<td style="text-align:right;">Address<span style="color:red">*</span></td>
-							<td><select name="address" list="{'张三','李四','王五'}"/></td>
-						</tr>
-						<tr>
-							<td style="text-align:right;">
-								<input type="submit" value="新建">
-							</td>
-							<td style="text-align:left;">
-								<input type="reset" value="取消">
-							</td>
-						</tr>
-						
-					</table> --%>
-					
-					<s:form action="" method="post">
-						<s:textfield label="First Name" name="fist_name"/>
-						<s:textfield label="Last Name" name="last_name"/>
-						<s:textfield label="Email" name="email"/>
-						<s:select list="{'张三','李四','王五'}" name="address" label="Address"/>
-						<s:submit name="submit" value="新建"/>
-					</s:form>
-					
+						<div class="form-group form-group-md">
+							<div class="col-md-2 col-md-offset-4">
+								<button type="submit" class="btn btn-primary" name="submit">提交</button>
+							</div>
+							<div class="col-md-2">
+								<button type="reset" class="btn btn-default" name="reset">取消</button>
+							</div>
+						</div>
+					</form>
 				</div>
 				
 			</div>
 		</div>
 
 </div>
-
+	<script src="jquery-2.1.4.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function(){
+				//获取Address数据
+				$.ajax({
+					type:"post",
+					dataType:"json",
+					data:"",
+					url:"/20150907ExamStruts2/getAddress.action",
+					error : function() {
+						alert("address数据回调失败")},
+					success:function(data){
+						var str = "";
+						var arr = eval(data);
+						// 把address添加到更新Customer的模态框的下拉列表里
+						for(i in arr){							
+							str +="<option>" + arr[i].address + "</option>";
+						}
+						$('#address').append(str);
+					}
+				}); 
+		});
+	</script>
 </body>
 </html>
